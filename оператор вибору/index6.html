@@ -1,0 +1,16 @@
+<!DOCTYPE html><html lang="uk"><head><meta charset="UTF-8"><title>Завдання 19а</title>
+<link rel="stylesheet" href="style.css"></head><body>
+<h2>19а. Точка (x,y) в заштрихованій області x ∈ [0,17], y ∈ [0,10]</h2>
+<label>x: <input id="x" type="number" value="5"></label>
+<label>y: <input id="y" type="number" value="5"></label>
+<button onclick="
+  let x=+document.getElementById('x').value,
+      y=+document.getElementById('y').value;
+  let t = (x>=0)&&(x<=17)&&(y>=0)&&(y<=10);
+  document.getElementById('r').textContent = 't = ' + t;
+">Виконати</button>
+<div id="r" class="result"></div>
+<div id="nav"></div>
+<script src="nav.js"></script>
+<script>renderNav('19')</script>
+</body></html>

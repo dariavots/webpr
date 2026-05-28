@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>2. Найбільше з трьох чисел</h2>
+    <label>a: <input id="a" type="number" value="0"></label>
+    <label>b: <input id="b" type="number" value="0"></label>
+    <label>c: <input id="c" type="number" value="0"></label>
+    <button onclick="let a=+document.getElementById('a').value, 
+    b=+document.getElementById('b').value,
+    c=+document.getElementById('c').value;
+    let max = a;
+    if (b > max) max = b;
+    if (c > max) max = c;
+  document.getElementById('r').textContent = 'Найбільше: ' + max;">Обрати</button>
+<div id="r" class="result"></div>
+</body>
+</html>

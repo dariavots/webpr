@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>4. k і l</h2>
+<label>k: <input id="k" type="number" value="0"></label>
+<label>l: <input id="l" type="number" value="0"></label>
+<button onclick=
+"let k=+document.getElementById('k').value,
+l=+document.getElementById('l').value;
+  if (k !== l) {
+    let m = k > l ? k : l;
+    k = m; l = m;
+  } else {
+    k = 0; l = 0;
+  }
+  document.getElementById('r').textContent = 'k=' + k + ', l=' + l;">Виконати</button>
+<div id="r" class="result"></div>
+</body>
+</html>

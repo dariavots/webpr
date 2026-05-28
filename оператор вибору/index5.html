@@ -1,0 +1,20 @@
+<!DOCTYPE html><html lang="uk"><head><meta charset="UTF-8"><title>Завдання 12</title>
+<link rel="stylesheet" href="style.css"></head><body>
+<h2>12. Цегла x*y*z через квадратний отвір a</h2>
+<label>x: <input id="x" type="number" value="5"></label>
+<label>y: <input id="y" type="number" value="3"></label>
+<label>z: <input id="z" type="number" value="10"></label>
+<label>a (сторона отвору): <input id="a" type="number" value="6"></label>
+<button onclick="
+  let x=+document.getElementById('x').value,
+      y=+document.getElementById('y').value,
+      z=+document.getElementById('z').value,
+      a=+document.getElementById('a').value;
+  let fits = (x<=a && y<=a) || (x<=a && z<=a) || (y<=a && z<=a);
+  document.getElementById('r').textContent = fits ? 'Пройде' : 'Не пройде';
+">Виконати</button>
+<div id="r" class="result"></div>
+<div id="nav"></div>
+<script src="nav.js"></script>
+<script>renderNav('12')</script>
+</body></html>

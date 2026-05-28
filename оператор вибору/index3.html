@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>7. Записати висловлювання у вигляді умов</h2>
+<label>a: <input id="a" type="number" value="0"></label>
+<button onclick=
+"let a=+document.getElementById('a').value;
+  document.getElementById('r').innerHTML =
+    'a) кратно 2 та 3: ' + ((a%2===0)&&(a%3===0)) + '<br>' +
+    'b) кратно 2 і не кратно 5: ' + ((a%2===0)&&(a%5!==0)) + '<br>' +
+    'c) a ∉ (0,3): ' + ((a<0)||(a>3)) + '<br>' +
+    'd) a ∈ [-2,0]: ' + ((a>=-2)&&(a<=0));">Виконати</button>
+<div id="r" class="result"></div>
+</body>
+</html>
