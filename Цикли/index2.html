@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head><meta charset="UTF-8"><title>Завдання 4</title></head>
+<body>
+<h2>4. Факторіал p</h2>
+<label>p: <input id="p" type="number" value="5"></label>
+<button onclick="
+  let p=+document.getElementById('p').value, f=1;
+  for(let i=2; i<=p; i++) f*=i;
+  document.getElementById('r').textContent = p + '! = ' + f;
+">Виконати</button>
+<div id="r"></div>
+</body></html>

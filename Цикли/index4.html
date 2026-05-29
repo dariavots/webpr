@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head><meta charset="UTF-8"><title>Завдання 10</title></head>
+<body>
+<h2>10. Вводити цілі числа поки вони парні - знайти середнє арифметичне</h2>
+<label>Число: <input id="inp" type="number" value="0"></label>
+<button onclick="
+  let val = +document.getElementById('inp').value;
+  if(val % 2 !== 0) {
+    document.getElementById('r').textContent = val + ' - непарне. Введення зупинено.\nСереднє: ' + (nums.length ? (sum/nums.length).toFixed(2) : 'немає чисел');
+    document.getElementById('addBtn').disabled = true;
+  } else {
+    nums.push(val);
+    sum += val;
+    document.getElementById('r').textContent = 'Введено: [' + nums.join(', ') + ']\nПоточне середнє: ' + (sum/nums.length).toFixed(2);
+  }
+">Додати</button>
+<button id="addBtn" style="display:none"></button>
+<button onclick="
+  nums=[]; sum=0;
+  document.getElementById('addBtn').disabled=false;
+  document.getElementById('r').textContent='очищено';
+">Очистити</button>
+<pre id="r"></pre>
+<script>
+let nums = [], sum = 0;
+</script>
+</body></html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head><meta charset="UTF-8"><title>Завдання 17</title></head>
+<body>
+<h2>17. Маса 12 предметів - знайти найважчий</h2>
+<label>Маса предмета №<span id="num">1</span>: <input id="inp" type="number" value="0" min="0"></label>
+<button onclick="
+  if(masses.length >= 12) return;
+  let val = +document.getElementById('inp').value;
+  masses.push(val);
+  document.getElementById('num').textContent = masses.length + 1;
+  document.getElementById('inp').value = 0;
+  if(masses.length === 12) {
+    let max = masses[0], idx = 0;
+    for(let i=1; i<12; i++) if(masses[i]>max){ max=masses[i]; idx=i; }
+    document.getElementById('r').textContent =
+      'Введено: [' + masses.join(', ') + ']\nНайважчий: предмет №' + (idx+1) + ', маса = ' + max;
+  } else {
+    document.getElementById('r').textContent = 'Введено ' + masses.length + '/12';
+  }
+">Додати</button>
+<button onclick="
+  masses=[];
+  document.getElementById('num').textContent='1';
+  document.getElementById('r').textContent='очищено';
+">Очистити</button>
+<pre id="r"></pre>
+
+<script>let masses = [];</script>
+
+</body></html>

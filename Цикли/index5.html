@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head><meta charset="UTF-8"><title>Завдання 14</title></head>
+<body>
+<h2>14. Вводити числа доки не введеш 0 - сума і кількість чисел що закінчуються на 2</h2>
+<label>Число: <input id="inp" type="number" value="12"></label>
+<button onclick="
+  let val = +document.getElementById('inp').value;
+  if(val === 0) {
+    document.getElementById('r').textContent =
+      'Кінець.\nКількість чисел на 2: ' + count + '\nСума: ' + sum;
+    document.getElementById('inp').disabled = true;
+  } else {
+    let lastDigit = Math.abs(val) % 10;
+    if(lastDigit === 2) { count++; sum += val; }
+    document.getElementById('r').textContent =
+      'Введено: ' + val + (lastDigit===2 ? ' ✓' : '') +
+      '\nПоточна кількість: ' + count + ', сума: ' + sum;
+  }
+">Додати</button>
+<button onclick="
+  count=0; sum=0;
+  document.getElementById('inp').disabled=false;
+  document.getElementById('r').textContent='очищено';
+">Очистити</button>
+<pre id="r"></pre>
+<script>
+let count = 0, sum = 0;
+</script>
+
+</body></html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head><meta charset="UTF-8"><title>Завдання 1</title></head>
+<body>
+<h2>1. Сума чисел</h2>
+
+<h3>a) Сума перших n натуральних чисел</h3>
+<label>n: <input id="a_n" type="number" value="0"></label>
+<button onclick="
+  let n=+document.getElementById('a_n').value, s=0;
+  for(let i=1; i<=n; i++) s+=i;
+  document.getElementById('ra').textContent = 'Сума: ' + s;
+">Виконати</button>
+<div id="ra"></div>
+<h3>b) Сума перших непарних чисел від 0 до n</h3>
+<label>n: <input id="b_n" type="number" value="0"></label>
+<button onclick="
+  let n=+document.getElementById('b_n').value, s=0;
+  for(let i=1; i<=n; i+=2) s+=i;
+  document.getElementById('rb').textContent = 'Сума: ' + s;
+">Виконати</button>
+<div id="rb"></div>
+<h3>c) Сума перших парних чисел від 0 до n</h3>
+<label>n: <input id="c_n" type="number" value="0"></label>
+<button onclick="
+  let n=+document.getElementById('c_n').value, s=0;
+  for(let i=2; i<=n; i+=2) s+=i;
+  document.getElementById('rc').textContent = 'Сума: ' + s;
+">Виконати</button>
+<div id="rc"></div>
+<h3>d) Сума чисел кратних 3 від 0 до n</h3>
+<label>n: <input id="d_n" type="number" value="0"></label>
+<button onclick="
+  let n=+document.getElementById('d_n').value, s=0;
+  for(let i=0; i<=n; i++) if(i%3===0) s+=i;
+  document.getElementById('rd').textContent = 'Сума: ' + s;
+">Виконати</button>
+<div id="rd"></div>
+<h3>e) Сума квадратів непарних чисел від a до b</h3>
+<label>a: <input id="e_a" type="number" value="0"></label>
+<label>b: <input id="e_b" type="number" value="0"></label>
+<button onclick="
+  let a=+document.getElementById('e_a').value,
+      b=+document.getElementById('e_b').value, s=0;
+  for(let i=a; i<=b; i++) if(i%2!==0) s+=i*i;
+  document.getElementById('re').textContent = 'Сума: ' + s;
+">Виконати</button>
+<div id="re"></div>
+<h3>f) Сума натуральних чисел кратних b та менших 100</h3>
+<label>b: <input id="f_b" type="number" value="0"></label>
+<button onclick="
+  let b=+document.getElementById('f_b').value, s=0;
+  for(let i=1; i<100; i++) if(i%b===0) s+=i;
+  document.getElementById('rf').textContent = 'Сума: ' + s;
+">Виконати</button>
+<div id="rf"></div>
+<h3>g) Сума квадратів перших n натуральних чисел, що при діленні на m дають залишок q</h3>
+<label>n: <input id="g_n" type="number" value="0"></label>
+<label>m: <input id="g_m" type="number" value="0"></label>
+<label>q: <input id="g_q" type="number" value="0"></label>
+<button onclick="
+  let n=+document.getElementById('g_n').value,
+      m=+document.getElementById('g_m').value,
+      q=+document.getElementById('g_q').value, s=0;
+  for(let i=1; i<=n; i++) if(i%m===q) s+=i*i;
+  document.getElementById('rg').textContent = 'Сума: ' + s;
+">Виконати</button>
+<div id="rg"></div>
+
+</body></html>

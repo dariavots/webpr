@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head><meta charset="UTF-8"><title>Завдання 22</title></head>
+<body>
+<h2>22. Найменша кількість доданків 1² + 2² + 3² + ... що перевищує z</h2>
+<label>z: <input id="z" type="number" value="50"></label>
+<button onclick="
+  let z=+document.getElementById('z').value;
+  let s=0, i=0;
+  while(s <= z) { i++; s += i*i; }
+  document.getElementById('r').textContent =
+    'Потрібно ' + i + ' доданків\n1² + 2² + ... + ' + i + '² = ' + s + ' > ' + z;
+">Виконати</button>
+<div id="r"></div>
+</body></html>
