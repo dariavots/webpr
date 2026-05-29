@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head><meta charset="UTF-8"><title>Завдання 5</title></head>
+<body>
+<h2>5. Масив з 12 випадкових дійсних чисел - сума негативних</h2>
+<button onclick="
+  let arr = [];
+  for(let i=0; i<12; i++) arr.push(+(Math.random()*20-10).toFixed(2));
+  let sum = 0;
+  for(let i=0; i<12; i++) if(arr[i]<0) sum+=arr[i];
+  document.getElementById('r').textContent =
+    'Масив: [' + arr.join(', ') + ']\nСума негативних: ' + sum.toFixed(2);
+">Згенерувати і порахувати</button>
+<pre id="r"></pre>
+</body></html>

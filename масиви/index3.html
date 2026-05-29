@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head><meta charset="UTF-8"><title>Завдання 4</title></head>
+<body>
+<h2>4. Масив з 10 чисел - вивести елементи з парним номером</h2>
+<p>Введіть 10 чисел через пробіл:</p>
+<input id="inp" type="text" value="10 20 30 40 50 60 70 80 90 100" style="width:350px">
+<button onclick="
+  let arr = document.getElementById('inp').value.trim().split(/\s+/).map(Number);
+  if(arr.length !== 10) { document.getElementById('r').textContent = 'Потрібно рівно 10 чисел!'; return; }
+  let res = '';
+  for(let i=0; i<10; i++) if(i%2 === 0) res += 'arr[' + i + '] = ' + arr[i] + '\n';
+  document.getElementById('r').textContent = res;
+">Виконати</button>
+<pre id="r"></pre>
+</body></html>

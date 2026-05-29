@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head><meta charset="UTF-8"><title>Завдання 1</title></head>
+<body>
+<h2>1. Масив з 15 цілих чисел - кількість непарних</h2>
+<p>Введіть 15 чисел через пробіл:</p>
+<input id="inp" type="text" value="1 2 3 4 5 6 7 8 9 10 11 12 13 14 15" style="width:350px">
+<button onclick="
+  let arr = document.getElementById('inp').value.trim().split(/\s+/).map(Number);
+  if(arr.length !== 15) { document.getElementById('r').textContent = 'Потрібно рівно 15 чисел!'; return; }
+  let count = 0;
+  for(let i=0; i<15; i++) if(arr[i]%2 !== 0) count++;
+  document.getElementById('r').textContent = 'Масив: [' + arr.join(', ') + ']\nКількість непарних: ' + count;
+">Виконати</button>
+<pre id="r"></pre>
+</body></html>

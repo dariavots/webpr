@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head><meta charset="UTF-8"><title>Завдання 2</title></head>
+<body>
+<h2>2. Масив з 10 випадкових чисел - кількість кратних 3</h2>
+<button onclick="
+  let arr = [];
+  for(let i=0; i<10; i++) arr.push(Math.floor(Math.random()*20)+1);
+  let count = 0;
+  for(let i=0; i<10; i++) if(arr[i]%3 === 0) count++;
+  document.getElementById('r').textContent = 'Масив: [' + arr.join(', ') + ']\nКратних 3: ' + count;
+">Згенерувати і порахувати</button>
+<pre id="r"></pre>
+</body></html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head><meta charset="UTF-8"><title>Завдання 3</title></head>
+<body>
+<h2>3. Масив доходів за 12 місяців - дохід за літні місяці</h2>
+<p>Введіть 12 чисел через пробіл (січень-грудень):</p>
+<input id="inp" type="text" value="100 200 300 400 500 600 700 800 900 1000 1100 1200" style="width:400px">
+<button onclick="
+  let arr = document.getElementById('inp').value.trim().split(/\s+/).map(Number);
+  if(arr.length !== 12) { document.getElementById('r').textContent = 'Потрібно рівно 12 чисел!'; return; }
+  let months = ['Січень','Лютий','Березень','Квітень','Травень','Червень','Липень','Серпень','Вересень','Жовтень','Листопад','Грудень'];
+  let sum = arr[5] + arr[6] + arr[7];
+  document.getElementById('r').textContent =
+    'Червень: ' + arr[5] + '\nЛипень: ' + arr[6] + '\nСерпень: ' + arr[7] + '\nСума за літо: ' + sum;
+">Виконати</button>
+<pre id="r"></pre>
+</body></html>
