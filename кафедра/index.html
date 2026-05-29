@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Кафедра економічної кібернетики та прикладної економіки Харківського національного університету імені В.Н.Каразіна"/>
+  <meta name="keywords" content="Економічна кібернетика, ХНУ Каразіна, бакалавр, магістр, економіка, IT, моделювання"/>
+  <title>Кафедра економічної кібернетики та прикладної економіки | ХНУ ім. В.Н.Каразіна</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Raleway:wght@600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:       #0056b3;
+      --blue-light: #1a7fe8;
+      --blue-dark:  #003d82;
+      --text:       #333333;
+      --text-muted: #666666;
+      --bg-page:    #f8f9fa;
+      --bg-side:    #e9ecef;
+      --bg-white:   #ffffff;
+      --border:     #dee2e6;
+      --shadow:     0 2px 12px rgba(0,0,0,.08);
+      --radius:     8px;
+      --transition: .25s ease;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg-page);
+    }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      background: var(--blue-dark);
+      color: #fff;
+      padding: 8px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .topbar a { color: #c8dff7; text-decoration: none; transition: color var(--transition); }
+    .topbar a:hover { color: #fff; }
+    .topbar__left { display: flex; align-items: center; gap: 16px; }
+    .topbar__logo-text { font-weight: 700; font-family: 'Raleway', sans-serif; font-size: 14px; letter-spacing: .3px; }
+    .topbar__univer { opacity: .85; }
+    .topbar__lang { display: flex; gap: 8px; font-size: 12px; }
+    .topbar__lang a { border: 1px solid rgba(255,255,255,.3); padding: 2px 8px; border-radius: 3px; }
+    .topbar__lang a:hover { background: rgba(255,255,255,.15); }
+
+    /* ── LAYOUT SHELL ── */
+    .shell {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      min-height: calc(100vh - 44px);
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: 280px;
+      flex-shrink: 0;
+      background: var(--bg-side);
+      min-height: calc(100vh - 44px);
+      padding: 28px 0 40px;
+      border-right: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+    }
+
+    .sidebar__brand {
+      padding: 0 20px 24px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 10px;
+    }
+    .sidebar__brand-title {
+      font-family: 'Raleway', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--blue-dark);
+      line-height: 1.3;
+      letter-spacing: .2px;
+    }
+    .sidebar__brand-sub {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .nav-group { margin-bottom: 4px; }
+    .nav-group__label {
+      display: block;
+      padding: 10px 20px 6px;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 1.1px;
+      text-transform: uppercase;
+      color: var(--blue);
+      border-bottom: 2px solid var(--blue);
+      margin: 0 20px 2px;
+    }
+
+    .nav-group ul { list-style: none; }
+    .nav-group ul li a {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 20px;
+      font-size: 13.5px;
+      color: var(--text);
+      text-decoration: none;
+      transition: color var(--transition), background var(--transition);
+      border-left: 3px solid transparent;
+    }
+    .nav-group ul li a::before {
+      content: '▸';
+      font-size: 10px;
+      color: var(--blue);
+      opacity: 0;
+      transition: opacity var(--transition), transform var(--transition);
+      flex-shrink: 0;
+    }
+    .nav-group ul li a:hover {
+      color: var(--blue);
+      background: rgba(0,86,179,.06);
+      font-weight: 600;
+    }
+    .nav-group ul li a:hover::before { opacity: 1; transform: translateX(2px); }
+    .nav-group ul li a.active {
+      color: var(--blue);
+      font-weight: 700;
+      border-left-color: var(--blue);
+      background: rgba(0,86,179,.08);
+    }
+    .nav-group ul li a.active::before { opacity: 1; }
+
+    .nav-group ul li ul { padding-left: 14px; }
+    .nav-group ul li ul li a { font-size: 13px; padding: 5px 20px; }
+
+    .sidebar__contacts {
+      margin: 24px 20px 0;
+      padding: 16px;
+      background: var(--bg-white);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      font-size: 13px;
+    }
+    .sidebar__contacts h4 {
+      font-family: 'Raleway', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--blue);
+      border-bottom: 2px solid var(--blue);
+      padding-bottom: 6px;
+      margin-bottom: 10px;
+    }
+    .contact-line {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 8px;
+      color: var(--text);
+      font-size: 12.5px;
+    }
+    .contact-line i { color: var(--blue); width: 14px; flex-shrink: 0; margin-top: 2px; }
+    .contact-line a { color: var(--blue); text-decoration: none; }
+    .contact-line a:hover { text-decoration: underline; }
+
+    .sidebar__social {
+      display: flex;
+      gap: 10px;
+      padding: 16px 20px 0;
+    }
+    .sidebar__social a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: #fff;
+      font-size: 15px;
+      text-decoration: none;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .sidebar__social a:hover { background: var(--blue-dark); transform: translateY(-2px); }
+
+    /* ── MAIN CONTENT ── */
+    .main {
+      flex: 1;
+      background: var(--bg-white);
+      padding: 40px 48px 60px;
+      min-width: 0;
+    }
+
+    /* HERO */
+    .hero {
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 28px;
+      margin-bottom: 32px;
+    }
+    .hero__badge {
+      display: inline-block;
+      background: var(--blue);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 3px;
+      margin-bottom: 12px;
+    }
+    .hero h1 {
+      font-family: 'Raleway', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--blue-dark);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .hero__sub {
+      font-size: 14.5px;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* INTRO */
+    .intro-text {
+      margin-bottom: 32px;
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--text);
+    }
+
+    /* SECTION HEADINGS */
+    .section-title {
+      font-family: 'Raleway', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--blue-dark);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title i { color: var(--blue); font-size: 17px; }
+
+    /* SPECIALIZATION CARDS */
+    .spec-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+    .spec-card {
+      background: var(--bg-page);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--blue);
+      border-radius: var(--radius);
+      padding: 20px 16px;
+      transition: box-shadow var(--transition), transform var(--transition);
+    }
+    .spec-card:hover { box-shadow: 0 6px 20px rgba(0,86,179,.12); transform: translateY(-3px); }
+    .spec-card__icon {
+      width: 44px; height: 44px;
+      background: var(--blue);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+    .spec-card h3 {
+      font-family: 'Raleway', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--blue-dark);
+      margin-bottom: 8px;
+    }
+    .spec-card p { font-size: 13px; color: var(--text-muted); line-height: 1.55; }
+
+    /* ACCORDION */
+    .accordion { margin-bottom: 36px; }
+    .accordion-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+    .accordion-btn {
+      width: 100%;
+      background: var(--bg-page);
+      border: none;
+      cursor: pointer;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      text-align: left;
+      transition: background var(--transition), color var(--transition);
+    }
+    .accordion-btn:hover { background: rgba(0,86,179,.06); color: var(--blue); }
+    .accordion-btn.open { background: var(--blue); color: #fff; }
+    .accordion-btn.open .accordion-icon { transform: rotate(45deg); }
+    .accordion-btn i.level-icon { font-size: 16px; color: inherit; }
+    .accordion-icon {
+      margin-left: auto;
+      font-size: 18px;
+      transition: transform .3s ease;
+      flex-shrink: 0;
+    }
+    .accordion-body {
+      display: none;
+      padding: 20px;
+      background: var(--bg-white);
+      border-top: 1px solid var(--border);
+    }
+    .accordion-body.open { display: block; }
+    .accordion-body ul { list-style: none; padding: 0; }
+    .accordion-body ul li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+    .accordion-body ul li:last-child { border-bottom: none; }
+    .accordion-body ul li i { color: var(--blue); font-size: 14px; width: 16px; }
+    .accordion-body ul li a {
+      color: var(--blue);
+      font-weight: 600;
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+    .accordion-body ul li a:hover { color: var(--blue-dark); text-decoration: underline; }
+
+    /* SURVEY SECTION */
+    .survey-box {
+      background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 100%);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      margin-bottom: 36px;
+      color: #fff;
+    }
+    .survey-box h2 {
+      font-family: 'Raleway', sans-serif;
+      font-size: 19px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .survey-box p { font-size: 14px; opacity: .85; margin-bottom: 20px; line-height: 1.5; }
+    .survey-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+    .survey-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 18px;
+      background: rgba(255,255,255,.12);
+      border: 1.5px solid rgba(255,255,255,.35);
+      border-radius: 30px;
+      color: #fff;
+      font-size: 13.5px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background var(--transition), border-color var(--transition), transform var(--transition);
+    }
+    .survey-tag:hover { background: rgba(255,255,255,.25); border-color: #fff; transform: translateY(-2px); }
+    .survey-tag i { font-size: 13px; }
+
+    /* CONTACT EMAIL */
+    .contact-email {
+      background: var(--bg-page);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 14px;
+    }
+    .contact-email i { font-size: 22px; color: var(--blue); }
+    .contact-email a { color: var(--blue); font-weight: 600; text-decoration: none; }
+    .contact-email a:hover { text-decoration: underline; }
+
+    /* VIDEO */
+    .video-wrap {
+      margin-top: 36px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      position: relative;
+      padding-top: 56.25%;
+    }
+    .video-wrap iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 16px;
+      font-size: 12px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      background: var(--bg-side);
+    }
+    footer a { color: var(--blue); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .shell { flex-direction: column; }
+      .sidebar { width: 100%; min-height: auto; position: static; border-right: none; border-bottom: 1px solid var(--border); padding: 20px 0; }
+      .main { padding: 24px 20px 40px; }
+      .spec-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 24px; }
+      .topbar__lang { display: none; }
+    }
+    @media (min-width: 901px) and (max-width: 1050px) {
+      .spec-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar__left">
+    <span class="topbar__logo-text">ХНУ ім. В.Н.Каразіна</span>
+    <a href="http://www.univer.kharkov.ua" class="topbar__univer" target="_blank">
+      <i class="fas fa-external-link-alt" style="font-size:11px; margin-right:4px;"></i>Перейти на сайт університету
+    </a>
+  </div>
+  <div class="topbar__lang">
+    <a href="http://www.cyber.kharkov.ua?locale=ua">UA</a>
+    <a href="http://www.cyber.kharkov.ua?locale=en">EN</a>
+  </div>
+</div>
+
+<div class="shell">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar">
+    <div class="sidebar__brand">
+      <div class="sidebar__brand-title">Кафедра економічної кібернетики<br>та прикладної економіки</div>
+      <div class="sidebar__brand-sub">ХНУ ім. В.Н.Каразіна</div>
+    </div>
+
+    <nav>
+      <div class="nav-group">
+        <span class="nav-group__label">Абітурієнту</span>
+        <ul>
+          <li><a href="http://www.cyber.kharkov.ua/page-entrant.html">Абітурієнту</a></li>
+          <li>
+            <ul>
+              <li><a href="http://www.cyber.kharkov.ua/page-entrant-links.html">Корисні посилання</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <span class="nav-group__label">Кафедра</span>
+        <ul>
+          <li><a href="http://www.cyber.kharkov.ua/page-about.html">Кафедра</a></li>
+          <li>
+            <ul>
+              <li><a href="http://www.cyber.kharkov.ua/page-news.html">Новини</a></li>
+              <li><a href="http://www.cyber.kharkov.ua/page-teachers.html">Викладачі</a></li>
+              <li><a href="http://www.cyber.kharkov.ua/page-graduate.html">Випускники</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <span class="nav-group__label">Навчальний процес</span>
+        <ul>
+          <li><a href="http://www.cyber.kharkov.ua/page-education.html">Навчальний процес</a></li>
+          <li>
+            <ul>
+              <li><a href="http://www.cyber.kharkov.ua/page-bachelor-cyb.html" class="active">Економічна кібернетика</a></li>
+              <li><a href="http://www.cyber.kharkov.ua/page-master-app.html">Прикладна економіка</a></li>
+              <li><a href="http://www.cyber.kharkov.ua/page-plan.html">Навчальні плани</a></li>
+              <li><a href="http://www.cyber.kharkov.ua/page-open_lessons.html">Відкриті заняття</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <span class="nav-group__label">Наукова робота</span>
+        <ul>
+          <li><a href="http://www.cyber.kharkov.ua/page-science.html">Наукова робота</a></li>
+          <li>
+            <ul>
+              <li><a href="http://www.cyber.kharkov.ua/page-journal.html">Вісник</a></li>
+              <li><a href="http://www.cyber.kharkov.ua/page-conferences.html">Конференції</a></li>
+              <li><a href="http://www.cyber.kharkov.ua/page-publications.html">Публікації</a></li>
+              <li><a href="http://www.cyber.kharkov.ua/page-monograph.html">Монографії та підручники</a></li>
+              <li><a href="http://www.cyber.kharkov.ua/page-seminar.html">Семінари</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="nav-group">
+        <span class="nav-group__label" style="border-color:var(--blue);">Контакти</span>
+        <ul>
+          <li><a href="http://www.cyber.kharkov.ua/page-contact.html">Контакти</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar__contacts">
+      <h4>Контакти</h4>
+      <div class="contact-line">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>м. Харків, майдан Свободи, 4, ауд. 6-52</span>
+      </div>
+      <div class="contact-line">
+        <i class="fas fa-phone"></i>
+        <span>+380 (50) 082-19-90<br>+380 (97) 263-60-73<br><small style="color:var(--text-muted);">Telegram, Viber</small></span>
+      </div>
+      <div class="contact-line">
+        <i class="fas fa-envelope"></i>
+        <a href="mailto:cyber@karazin.ua">cyber@karazin.ua</a>
+      </div>
+    </div>
+
+    <div class="sidebar__social">
+      <a href="https://www.facebook.com/cyberkharkov/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/cyber__space/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="mailto:cyber.khnu@gmail.com" title="Gmail"><i class="fas fa-envelope"></i></a>
+    </div>
+  </aside>
+
+  <!-- ── MAIN ── -->
+  <main class="main">
+
+    <!-- HERO -->
+    <div class="hero">
+      <span class="hero__badge"><i class="fas fa-graduation-cap" style="margin-right:5px;"></i>Освітня програма</span>
+      <h1>Економічна кібернетика</h1>
+      <p class="hero__sub">Спеціальність 051 «Економіка» &nbsp;·&nbsp; Бакалавр та Магістр</p>
+    </div>
+
+    <!-- INTRO -->
+    <p class="intro-text">
+      Освітньо-професійна програма «Економічна кібернетика» дає можливість отримати сучасні знання та практичні вміння, які будуть потрібні для побудови успішної кар'єри та протягом всього життя.
+    </p>
+
+    <!-- SPEC CARDS -->
+    <h2 class="section-title"><i class="fas fa-layer-group"></i> Складові програми</h2>
+    <div class="spec-grid">
+      <div class="spec-card">
+        <div class="spec-card__icon"><i class="fas fa-chart-line"></i></div>
+        <h3>Економіка та Фінанси</h3>
+        <p>Мікро- та макроекономіка, міжнародна економіка, фінанси, менеджмент, інвестиційний аналіз, бухгалтерський облік, маркетинг та ін.</p>
+      </div>
+      <div class="spec-card">
+        <div class="spec-card__icon"><i class="fas fa-brain"></i></div>
+        <h3>Комп'ютерне Моделювання</h3>
+        <p>Прикладна економетрика, імітаційне моделювання, нейронні мережі, Data mining, моделювання бізнес-процесів, управління ризиком та ін.</p>
+      </div>
+      <div class="spec-card">
+        <div class="spec-card__icon"><i class="fas fa-code"></i></div>
+        <h3>IT-Технології</h3>
+        <p>Інформатика, інформаційні системи в управлінні, web-програмування, е-комерція, програмні оболонки та пакети, інформаційний бізнес та ін.</p>
+      </div>
+    </div>
+
+    <!-- ACCORDION – освітні програми та плани -->
+    <h2 class="section-title"><i class="fas fa-file-alt"></i> Освітні програми та навчальні плани</h2>
+    <div class="accordion">
+
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+          <i class="fas fa-user-graduate level-icon"></i>
+          Освітній рівень — Бакалавр
+          <span class="accordion-icon">+</span>
+        </button>
+        <div class="accordion-body">
+          <ul>
+            <li>
+              <i class="fas fa-file-pdf"></i>
+              <a href="https://drive.google.com/file/d/1uA7AL4fWVfuKCJr3e2AgVDTHiVhc77vE/view?usp=sharing" target="_blank">
+                Освітньо-професійна програма «Економічна кібернетика» (Бакалавр)
+              </a>
+            </li>
+            <li>
+              <i class="fas fa-folder-open"></i>
+              <a href="https://drive.google.com/drive/folders/1HyLip6Tw6FJRNYzBxE06v2PwUg7PeIvD?usp=sharing" target="_blank">
+                Навчальні плани (Бакалавр)
+              </a>
+            </li>
+            <li>
+              <i class="fas fa-folder-open"></i>
+              <a href="https://drive.google.com/drive/folders/1gIltF5N26jmaL1qeOoTPyXDNIotlYwrC?usp=sharing" target="_blank">
+                Робочі плани (Бакалавр)
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAccordion(this)">
+          <i class="fas fa-user-tie level-icon"></i>
+          Освітній рівень — Магістр
+          <span class="accordion-icon">+</span>
+        </button>
+        <div class="accordion-body">
+          <ul>
+            <li>
+              <i class="fas fa-file-pdf"></i>
+              <a href="https://drive.google.com/file/d/1FXahTUAR9xRFNHukyoXXA8ERT2H1x6dn/view?usp=sharing" target="_blank">
+                Освітньо-професійна програма «Економічна кібернетика» (Магістр)
+              </a>
+            </li>
+            <li>
+              <i class="fas fa-folder-open"></i>
+              <a href="https://drive.google.com/drive/folders/1HyLip6Tw6FJRNYzBxE06v2PwUg7PeIvD?usp=sharing" target="_blank">
+                Навчальні плани (Магістр)
+              </a>
+            </li>
+            <li>
+              <i class="fas fa-folder-open"></i>
+              <a href="https://drive.google.com/drive/folders/1gIltF5N26jmaL1qeOoTPyXDNIotlYwrC?usp=sharing" target="_blank">
+                Робочі плани (Магістр)
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SURVEY -->
+    <div class="survey-box">
+      <h2><i class="fas fa-comments" style="margin-right:8px;"></i>Зробимо освіту кращою разом!</h2>
+      <p>Шановні здобувачі, випускники, роботодавці, колеги! Ви можете надати пропозиції щодо підвищення якості освітніх програм за наведеними посиланнями.</p>
+      <div class="survey-tags">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSead2S7jmKQFkrV4OoQBL5Ku3dVMPLArpDiROl46VY8mkycpw/viewform?usp=sharing" target="_blank" class="survey-tag">
+          <i class="fas fa-chalkboard-teacher"></i> Викладачі
+        </a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScmW2h6MLxC0twb-MKtjNuUsqIcxiOTQhMwhLFKrkvvENNhWA/viewform?usp=sharing" target="_blank" class="survey-tag">
+          <i class="fas fa-user-graduate"></i> Випускники
+        </a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdFzBIFIlMz9-XWScZVVYU8-hLdkm3Jb3NC38kGPI-Gjkv7Bw/viewform?usp=sharing" target="_blank" class="survey-tag">
+          <i class="fas fa-briefcase"></i> Роботодавці
+        </a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSf97m4bJrVywFkaIdSP1vd4AfGmOwuhNgc_AX0tC7gM9YUFJw/viewform?usp=sharing" target="_blank" class="survey-tag">
+          <i class="fas fa-user-friends"></i> Студенти
+        </a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSe66fkaHOkUO99ePHFWO0i1su01QrkO_rMHEAsfx7BtNTFYsw/viewform?usp=sharing" target="_blank" class="survey-tag">
+          <i class="fas fa-globe"></i> Випускники-іноземці
+        </a>
+      </div>
+    </div>
+
+    <!-- EMAIL CONTACT -->
+    <div class="contact-email">
+      <i class="fas fa-envelope-open-text"></i>
+      <span>Будь-які питання: <a href="mailto:cyber@karazin.ua">cyber@karazin.ua</a> або <a href="mailto:cyber.khnu@gmail.com">cyber.khnu@gmail.com</a></span>
+    </div>
+
+    <!-- VIDEO -->
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/sbtrQKt7nxg" title="Кафедра економічної кібернетики" allowfullscreen></iframe>
+    </div>
+
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2013–2026 Кафедра економічної кібернетики та прикладної економіки &nbsp;·&nbsp; ХНУ ім. В.Н.Каразіна &nbsp;·&nbsp; Розробка сайту <a href="http://www.koda-ltd.com/" target="_blank">ООО "KODA"</a></p>
+</footer>
+
+<script>
+  function toggleAccordion(btn) {
+    const body = btn.nextElementSibling;
+    const icon = btn.querySelector('.accordion-icon');
+    const isOpen = body.classList.contains('open');
+
+    // Close all
+    document.querySelectorAll('.accordion-body').forEach(b => b.classList.remove('open'));
+    document.querySelectorAll('.accordion-btn').forEach(b => {
+      b.classList.remove('open');
+      b.querySelector('.accordion-icon').textContent = '+';
+    });
+
+    if (!isOpen) {
+      body.classList.add('open');
+      btn.classList.add('open');
+      icon.textContent = '×';
+    }
+  }
+</script>
+</body>
+</html>
